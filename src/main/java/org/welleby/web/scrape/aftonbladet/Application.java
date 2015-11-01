@@ -1,3 +1,5 @@
+package org.welleby.web.scrape.aftonbladet;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.ReversedLinesFileReader;
 
@@ -10,7 +12,7 @@ import java.net.URL;
 /**
  * Created by kerling on 01/11/15.
  */
-public class Tst {
+public class Application {
 
     private static String baseUrl = "http://www.aftonbladet.se/article";
 
