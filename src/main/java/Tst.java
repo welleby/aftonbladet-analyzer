@@ -17,12 +17,16 @@ public class Tst {
 
     public static void main(String[] args) throws IOException {
         File workingUrls = new File("workingsUrls.txt");
+        ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrls);
         int currentId;
         try {
-            String lastUrl = new ReversedLinesFileReader(workingUrls).readLine();
+            String lastUrl = fileReader.readLine();
+            
             currentId = Integer.parseInt(lastUrl.replaceAll("[^-?0-9]+", ""));
         } catch (FileNotFoundException exception) {
             currentId = 446;
+        } finally{
+        	fileReader.close();
         }
 
         for (int i = currentId + 1; i < 21684046; i++) {
