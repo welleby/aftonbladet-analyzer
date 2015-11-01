@@ -8,8 +8,9 @@ import java.sql.Date;
  */
 public class Article {
 
-    private static final String ARTICLE_DIV = "abMd6 abLefty abArticle ";
+    private static final String ARTICLE_DIV = "abBodyText clearfix abJsBodyText";
     private String title, body, author;
+    private int wordCount;
 
     private Date timestamp;
 
@@ -34,9 +35,11 @@ public class Article {
     }
 
     private void parseDocument(Document doc) {
-        Elements elementsByClass = doc.body().getElementsByAttributeValueContaining("class",ARTICLE_DIV);
-        elementsByClass.html();
-        System.out.println(elementsByClass);
-
+        Elements abLeadText = doc.body().getElementsByAttributeValueContaining("class", "abBodyText clearfix abJsBodyText");
+        body = abLeadText.text();
+        String trim = body.trim();
+        wordCount = trim.split("\\s+").length;
+        System.out.println(body);
+        System.out.println(wordCount);
     }
 }

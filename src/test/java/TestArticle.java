@@ -10,7 +10,7 @@ public class TestArticle {
 
     public static void main(String[] args) {
 
-        Connection conn = Jsoup.connect("http://www.aftonbladet.se/article207081.ab");
+        Connection conn = Jsoup.connect("http://www.aftonbladet.se/nyheter/article21685099.ab");
         try {
             Article article = new Article(conn.get());
             System.out.println("finished");
