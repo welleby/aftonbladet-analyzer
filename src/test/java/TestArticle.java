@@ -1,5 +1,6 @@
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+import org.welleby.web.scrape.aftonbladet.Article;
 
 import java.io.IOException;
 
