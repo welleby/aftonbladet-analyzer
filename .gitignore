@@ -12,6 +12,8 @@ bin/
 .settings/
 .classpath
 .project
+*META-INF*
+*MANIFEST*
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 .DS_Store
