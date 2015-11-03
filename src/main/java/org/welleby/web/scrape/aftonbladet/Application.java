@@ -27,9 +27,9 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
         workingUrlsFile = new File(URL_FILE);
-        ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrlsFile);
+        
         int currentId;
-        try {
+        try (ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrlsFile)){
             logger.debug("Reading file " + URL_FILE + " to pick up where we left of.");
             String lastUrl = fileReader.readLine();
 
@@ -37,9 +37,7 @@ public class Application {
             logger.debug("Starting at " + currentId);
         } catch (FileNotFoundException exception) {
             currentId = 446;
-        } finally {
-            fileReader.close();
-        }
+        } 
 
         for (int i = currentId + 1; i < 21684046; i++) {
             URL url = new URL(baseUrl + i + ".ab");
