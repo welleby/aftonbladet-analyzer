@@ -30,43 +30,43 @@ public class Application {
         ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrlsFile);
         int currentId;
         try {
-        	logger.debug("Reading file "+URL_FILE+" to pick up where we left of.");
+            logger.debug("Reading file " + URL_FILE + " to pick up where we left of.");
             String lastUrl = fileReader.readLine();
-            
+
             currentId = Integer.parseInt(lastUrl.replaceAll("[^-?0-9]+", ""));
-            logger.debug("Starting at "+currentId);
+            logger.debug("Starting at " + currentId);
         } catch (FileNotFoundException exception) {
             currentId = 446;
-        } finally{
-        	fileReader.close();
+        } finally {
+            fileReader.close();
         }
 
         for (int i = currentId + 1; i < 21684046; i++) {
             URL url = new URL(baseUrl + i + ".ab");
-            
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("HEAD");
             connection.setInstanceFollowRedirects(false);
             int responseCode = connection.getResponseCode();
             if (responseCode == 301 || responseCode == 200) {
-            	logger.info("Found url: "+url);
-            	workingUrls.add(url);
-            }else {
-            	logger.info(responseCode+" on url: "+url);
+                logger.info("Found url: " + url);
+                workingUrls.add(url);
+            } else {
+                logger.info(responseCode + " on url: " + url);
             }
-            
-            if(workingUrls.size()>=WRITE_BUFFER) {
-            	writeUrls();
-            	workingUrls.clear();
+
+            if (workingUrls.size() >= WRITE_BUFFER) {
+                writeUrls();
+                workingUrls.clear();
             }
         }
     }
-    
+
     private static void writeUrls() throws IOException {
-    	String result = "";
-    	for (URL url : workingUrls) {
-			result+="\n"+url.toString();
-		}
-    	FileUtils.writeStringToFile(workingUrlsFile, result, true);
+        String result = "";
+        for (URL url : workingUrls) {
+            result += "\n" + url.toString();
+        }
+        FileUtils.writeStringToFile(workingUrlsFile, result, true);
     }
 }
