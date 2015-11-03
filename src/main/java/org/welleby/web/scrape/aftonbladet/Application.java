@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kerling on 01/11/15.
@@ -18,11 +20,14 @@ public class Application {
     private static String baseUrl = "http://www.aftonbladet.se/article";
     private static final String URL_FILE = "workingUrls.txt";
     private static Logger logger = LogManager.getLogger(Application.class);
+    private static File workingUrlsFile;
+    private static List<URL> workingUrls = new ArrayList<URL>();
+    private static final int WRITE_BUFFER = 1000;
 
 
     public static void main(String[] args) throws IOException {
-        File workingUrls = new File(URL_FILE);
-        ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrls);
+        workingUrlsFile = new File(URL_FILE);
+        ReversedLinesFileReader fileReader = new ReversedLinesFileReader(workingUrlsFile);
         int currentId;
         try {
         	logger.debug("Reading file "+URL_FILE+" to pick up where we left of.");
@@ -45,10 +50,23 @@ public class Application {
             int responseCode = connection.getResponseCode();
             if (responseCode == 301 || responseCode == 200) {
             	logger.info("Found url: "+url);
-                FileUtils.writeStringToFile(workingUrls, url + "\n", true);
+            	workingUrls.add(url);
             }else {
             	logger.info(responseCode+" on url: "+url);
             }
+            
+            if(workingUrls.size()>=WRITE_BUFFER) {
+            	writeUrls();
+            	workingUrls.clear();
+            }
         }
+    }
+    
+    private static void writeUrls() throws IOException {
+    	String result = "";
+    	for (URL url : workingUrls) {
+			result+="\n"+url.toString();
+		}
+    	FileUtils.writeStringToFile(workingUrlsFile, result, true);
     }
 }
