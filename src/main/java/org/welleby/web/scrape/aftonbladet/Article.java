@@ -1,5 +1,7 @@
 package org.welleby.web.scrape.aftonbladet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 
 import java.sql.Date;
@@ -15,6 +17,7 @@ public class Article {
     private static final String AUTHOR_DIV = "abByline";
     private static final String TIMESTAMP_ATTR = "ABse.page.articlePublishedDateTime";
     private static final String DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    private static final Logger logger = LogManager.getLogger(Article.class);
 
     private String title, body, author;
     private int wordCount;
@@ -40,6 +43,10 @@ public class Article {
     public Article(Document document) {
         parseDocument(document);
     }
+    
+    public String toString() {
+    	return String.format("Title: %s, Author: %s, Timestamp: %s, WordCount: %s ", title, author,timestamp,wordCount);
+    }
 
     private void parseDocument(Document doc) {
         body = doc.body().getElementsByAttributeValueContaining("class", ARTICLE_DIV).text();
@@ -53,10 +60,7 @@ public class Article {
             timestamp = new Date(d.getTime());
         } catch (ParseException e) {
         }
-        System.out.println(title);
-        System.out.println(body);
-        System.out.println(wordCount);
-        System.out.println(author);
-        System.out.println(timestamp);
+        
+        logger.debug(this.toString());
     }
 }

@@ -28,3 +28,6 @@ http://www.aftonbladet.se/article565.ab
 http://www.aftonbladet.se/article567.ab
 http://www.aftonbladet.se/article568.ab
 http://www.aftonbladet.se/article576.ab
+http://www.aftonbladet.se/article585.ab
+http://www.aftonbladet.se/article586.ab
+http://www.aftonbladet.se/article587.ab
