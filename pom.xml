@@ -28,6 +28,11 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.4.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.javalite</groupId>
+			<artifactId>activejdbc</artifactId>
+			<version>1.4.11</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -53,6 +58,16 @@
 							<mainClass>${main.class}</mainClass>
 						</manifest>
 					</archive>
+				</configuration>
+			</plugin>
+			<!-- Change target/source jre -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>
