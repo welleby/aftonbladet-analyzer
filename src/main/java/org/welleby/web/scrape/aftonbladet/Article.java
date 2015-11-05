@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
  * Created by kerling on 01/11/15.
  */
 public class Article {
-
     private static final String ARTICLE_DIV = "abBodyText clearfix abJsBodyText";
     private static final String AUTHOR_DIV = "abByline";
     private static final String TIMESTAMP_ATTR = "ABse.page.articlePublishedDateTime";
