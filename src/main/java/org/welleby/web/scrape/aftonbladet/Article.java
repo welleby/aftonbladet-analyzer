@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,9 +19,14 @@ public class Article {
     private static final Logger logger = LogManager.getLogger(Article.class);
 
     private String title, body, author;
+
     private int wordCount;
 
-    private Date timestamp;
+    private Timestamp timestamp;
+
+    public int getWordCount() {
+        return wordCount;
+    }
 
     public String getTitle() {
         return title;
@@ -35,16 +40,16 @@ public class Article {
         return author;
     }
 
-    public Date getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
     public Article(Document document) {
         parseDocument(document);
     }
-    
+
     public String toString() {
-    	return String.format("Title: %s, Author: %s, Timestamp: %s, WordCount: %s ", title, author,timestamp,wordCount);
+        return String.format("Title: %s, Author: %s, Timestamp: %s, WordCount: %s ", title, author, timestamp, wordCount);
     }
 
     private void parseDocument(Document doc) {
@@ -56,10 +61,10 @@ public class Article {
         int index = s.indexOf(TIMESTAMP_ATTR);
         try {
             java.util.Date d = new SimpleDateFormat(DATETIME_FORMAT).parse(s.substring(index + 38, index + 57));
-            timestamp = new Date(d.getTime());
+            timestamp = new Timestamp(d.getTime());
         } catch (ParseException e) {
         }
-        
+
         logger.debug(this.toString());
     }
 }
