@@ -1,4 +1,4 @@
-package org.welleby.web.scrape.aftonbladet.activeJDBC;
+package org.welleby.web.scrape.aftonbladet.persistence;
 
 import org.javalite.activejdbc.Model;
 
