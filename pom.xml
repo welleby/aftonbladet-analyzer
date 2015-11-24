@@ -8,7 +8,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
-		<main.class>org.welleby.web.scrape.aftonbladet.Application</main.class>
+		<main.class>org.welleby.web.scrape.aftonbladet.ArticleScraper</main.class>
 	</properties>
 
 	<dependencies>
